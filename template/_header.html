@@ -1,0 +1,9 @@
+{%  set fb = fb_batch({
+    "page"    : "lufthansa/?fields=name,website",
+  })
+%}
+
+
+<h1><a href="{{fb.page.website}}">{{fb.page.name}}</a></h1>
+
+<hr>

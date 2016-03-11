@@ -1,0 +1,50 @@
+{% extends "_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="http://nitinhayaran.github.io/Justified.js/jquery.justified.css" />
+<script src="http://nitinhayaran.github.io/Justified.js/jquery.justified.js"></script>
+<style type="text/css">
+.picrow {
+  width: 200%;
+}
+</style>
+{% endblock %}
+
+{% set album = fb_json("#{album_id}/?fields=name,photos{name,picture,images}") %}
+
+{% block content %}
+
+<div class="gallery" style="overflow: hidden"></div>
+<script type="text/javascript">
+
+  var album = {{album|raw}};
+  var photos = album.photos.data; // array
+  fb_photos_justify('.gallery', photos);
+
+  function fb_photos_justify(selector, photos) {
+    $(selector).empty().justifiedImages({
+    images: photos,
+    rowHeight: 400,
+    maxRowHeight: 800,
+    thumbnailPath: function(photo, width, height) {
+      var images = photo.images;
+      images.sort(function(a,b) { return a.width > b.width ? 1 : -1; });
+      var image = images[0];
+      for(var i = 1; i < images.length; i++) {
+        if(width > image.width * 1.2 || height > image.height * 1.2)
+          image = images[i];
+        else break;
+      }
+      return image.source;
+    },
+    getSize: function(photo) {
+      return {
+        width: photo.images[0].width,
+        height: photo.images[0].height
+      };
+    },
+    margin: 1
+    });
+  }
+</script>
+{% endblock %}

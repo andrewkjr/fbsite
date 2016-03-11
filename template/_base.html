@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        HEADER (c:/htdocs)
+        <hr>
+        <div id="content">
+          {% block content %}{% endblock %}
+        </div>
+        <hr>
+        FOOTER
+    </body>
+</html>

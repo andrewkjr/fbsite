@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% set albums_json = fb_json("rubtsovaclose/?fields=albums.limit(20){name,cover_photo{images}}") %}
+{% set albums = json_decode(albums_json).albums.data %}
+
+
+{% block head %}
+<style type="text/css">
+  .important { color: #336699; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% for album in albums %}
+<li>
+  <a class="important" href="album.php?album_id={{album.id}}">{{album.name}}</a>
+</li>
+{% endfor %}
+
+<script>
+  console.log({{albums_json|raw}})
+</script>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig":"~1.0",
+        "facebook/php-sdk-v4": "~4.0",
+        "guzzlehttp/guzzle": "*"
+    }
+}
