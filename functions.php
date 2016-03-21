@@ -39,7 +39,7 @@ function twig_render_nocache($template, $params=array()) {
     return fb($path);
   }));
   $twig->addFunction(new Twig_SimpleFunction('json_decode', function ($json) {
-    return json_decode($json);
+    return json_decode($json, true);
   }));
   $twig->addFunction(new Twig_SimpleFunction('fb_json', function ($path) {
     return fb_json($path);
@@ -58,7 +58,7 @@ function fb_batch($paths, $cache_time=CACHE_TIME_FB_API_CALL) {
 
 // Facebook API call
 function fb($path, $cache_time=CACHE_TIME_FB_API_CALL) {
-  return json_decode(fb_json($path,$cache_time));
+  return json_decode(fb_json($path,$cache_time), true);
 }
 
 // Facebook API call
